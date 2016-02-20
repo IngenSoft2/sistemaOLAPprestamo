@@ -29,7 +29,7 @@ CREATE TABLE `Usuario` (
 DROP TABLE IF EXISTS `Carrera`;
 		
 CREATE TABLE `Carrera` (
-  `clave_carrera` CHAR(3) NOT NULL DEFAULT 'NULL',
+  `clave_carrera` CHAR(3) NOT NULL DEFAULT 'NUL',
   `nombre` VARCHAR(150) NOT NULL DEFAULT 'NULL',
   `plan` CHAR(4) NULL DEFAULT NULL,
   PRIMARY KEY (`clave_carrera`)
@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `Cursar`;
 		
 CREATE TABLE `Cursar` (
   `usuario` CHAR(9) NOT NULL DEFAULT 'NULL',
-  `carrera` CHAR(3) NOT NULL DEFAULT 'NULL',
+  `carrera` CHAR(3) NOT NULL DEFAULT 'NUL',
   PRIMARY KEY (`usuario`, `carrera`)
 );
 
@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `Libro`;
 		
 CREATE TABLE `Libro` (
   `clave_libro` CHAR(15) NOT NULL DEFAULT 'NULL',
-  `ejemplar` INTEGER NOT NULL DEFAULT NULL,
+  `ejemplar` INTEGER NOT NULL DEFAULT 0,
   `titulo` VARCHAR(200) NOT NULL DEFAULT 'NULL',
   `paginas` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`clave_libro`, `ejemplar`)
@@ -72,8 +72,8 @@ DROP TABLE IF EXISTS `Autor`;
 		
 CREATE TABLE `Autor` (
   `clave_autor` CHAR(5) NOT NULL DEFAULT 'NULL',
-  `nombre` VARCHAR(150) NOT NULL DEFAULT 'pedro',
-  `sexo` CHAR(1) NULL DEFAULT NULL,
+  `nombre` VARCHAR(150) NOT NULL DEFAULT 'Nombre',
+  `sexo` CHAR(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`clave_autor`)
 );
 
@@ -87,7 +87,7 @@ DROP TABLE IF EXISTS `Escribir`;
 CREATE TABLE `Escribir` (
   `autor` CHAR(5) NOT NULL DEFAULT 'NULL',
   `libro` CHAR(15) NOT NULL DEFAULT 'NULL',
-  `ejemplar` INTEGER NOT NULL DEFAULT NULL,
+  `ejemplar` INTEGER NOT NULL,
   PRIMARY KEY (`autor`, `libro`, `ejemplar`)
 );
 
@@ -101,10 +101,10 @@ DROP TABLE IF EXISTS `Prestamo`;
 CREATE TABLE `Prestamo` (
   `usuario` CHAR(9) NOT NULL DEFAULT 'NULL',
   `libro` CHAR(15) NOT NULL DEFAULT 'NULL',
-  `ejemplar` INTEGER NOT NULL DEFAULT NULL,
-  `fecha_prestamo` DATE NOT NULL DEFAULT 'NULL',
-  `fecha_devolucion` DATE NOT NULL DEFAULT 'NULL',
-  `fecha_entrega_real` DATE NULL DEFAULT NULL,
+  `ejemplar` INTEGER NOT NULL DEFAULT 0,
+  `fecha_prestamo` DATE NOT NULL,
+  `fecha_devolucion` DATE NOT NULL,
+  `fecha_entrega_real` DATE NULL,
   PRIMARY KEY (`usuario`, `libro`, `ejemplar`, `fecha_prestamo`)
 );
 
@@ -116,7 +116,7 @@ CREATE TABLE `Prestamo` (
 DROP TABLE IF EXISTS `Materia`;
 		
 CREATE TABLE `Materia` (
-  `clave_materia` CHAR(3) NOT NULL DEFAULT 'NULL',
+  `clave_materia` CHAR(3) NOT NULL DEFAULT 'NUL',
   `nombre` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`clave_materia`)
 );
@@ -130,8 +130,8 @@ DROP TABLE IF EXISTS `Tratar`;
 		
 CREATE TABLE `Tratar` (
   `libro` CHAR(15) NOT NULL DEFAULT 'NULL',
-  `ejemplar` INTEGER NOT NULL DEFAULT NULL,
-  `materia` CHAR(3) NOT NULL DEFAULT 'NULL',
+  `ejemplar` INTEGER NOT NULL DEFAULT 0,
+  `materia` CHAR(3) NOT NULL DEFAULT 'NUL',
   PRIMARY KEY (`libro`, `ejemplar`, `materia`)
 );
 
@@ -142,13 +142,13 @@ CREATE TABLE `Tratar` (
 ALTER TABLE `Cursar` ADD FOREIGN KEY (usuario) REFERENCES `Usuario` (`clave_usuario`);
 ALTER TABLE `Cursar` ADD FOREIGN KEY (carrera) REFERENCES `Carrera` (`clave_carrera`);
 ALTER TABLE `Escribir` ADD FOREIGN KEY (autor) REFERENCES `Autor` (`clave_autor`);
-ALTER TABLE `Escribir` ADD FOREIGN KEY (libro) REFERENCES `Libro` (`clave_libro`);
-ALTER TABLE `Escribir` ADD FOREIGN KEY (ejemplar) REFERENCES `Libro` (`ejemplar`);
+ALTER TABLE `Escribir` ADD FOREIGN KEY (libro,ejemplar) REFERENCES `Libro` (`clave_libro`,ejemplar);
+--ALTER TABLE `Escribir` ADD FOREIGN KEY (ejemplar) REFERENCES `Libro` (`ejemplar`);
 ALTER TABLE `Prestamo` ADD FOREIGN KEY (usuario) REFERENCES `Usuario` (`clave_usuario`);
-ALTER TABLE `Prestamo` ADD FOREIGN KEY (libro) REFERENCES `Libro` (`clave_libro`);
-ALTER TABLE `Prestamo` ADD FOREIGN KEY (ejemplar) REFERENCES `Libro` (`ejemplar`);
-ALTER TABLE `Tratar` ADD FOREIGN KEY (libro) REFERENCES `Libro` (`clave_libro`);
-ALTER TABLE `Tratar` ADD FOREIGN KEY (ejemplar) REFERENCES `Libro` (`ejemplar`);
+ALTER TABLE `Prestamo` ADD FOREIGN KEY (libro,ejemplar) REFERENCES `Libro` (`clave_libro`,ejemplar);
+--ALTER TABLE `Prestamo` ADD FOREIGN KEY (ejemplar) REFERENCES `Libro` (`ejemplar`);
+ALTER TABLE `Tratar` ADD FOREIGN KEY (libro,ejemplar) REFERENCES `Libro` (`clave_libro`,ejemplar);
+--ALTER TABLE `Tratar` ADD FOREIGN KEY (ejemplar) REFERENCES `Libro` (`ejemplar`);
 ALTER TABLE `Tratar` ADD FOREIGN KEY (materia) REFERENCES `Materia` (`clave_materia`);
 
 -- ---
