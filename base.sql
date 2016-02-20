@@ -16,7 +16,7 @@ CREATE TABLE `Usuario` (
   `clave_usuario` CHAR(9) NOT NULL DEFAULT 'NULL',
   `nombre` VARCHAR(150) NOT NULL DEFAULT 'juan',
   `sexo` CHAR(1) NULL DEFAULT NULL,
-  `generacion` CHAR(5) NULL DEFAULT NULL,
+  `generacion` CHAR(6) NULL DEFAULT NULL,
   `fecha_nacimiento` DATE NULL DEFAULT NULL,
   PRIMARY KEY (`clave_usuario`)
 );
