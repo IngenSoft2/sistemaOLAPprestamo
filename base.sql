@@ -187,3 +187,5 @@ ALTER TABLE `Tratar` ADD FOREIGN KEY (materia) REFERENCES `Materia` (`clave_mate
 -- ('','');
 -- INSERT INTO `Tratar` (`libro`,`ejemplar`,`materia`) VALUES
 -- ('','','');
+INSERT INTO `Libro` (`clave_libro`,`ejemplar`,`titulo`,`paginas`) VALUES
+('',,'',);
