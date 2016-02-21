@@ -24,7 +24,7 @@ BEGIN {
 		paginas = randint100(450)
 		for (j=1; j <= randint(9); j++){
 			ejemplar = j
-			print i FS id FS ejemplar FS paginas
+			print "('" id "'," ejemplar ",' '," paginas "),"
 		}
 	}
 exit
