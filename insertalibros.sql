@@ -1003,4 +1003,4 @@ INSERT INTO `Libro` (`clave_libro`,`ejemplar`,`titulo`,`paginas`) VALUES
 ('6647167443538',2,'Functional Safety (Second Edition)',326),
 ('6647167443538',3,'Functional Safety (Second Edition)',326),
 ('6647167443538',4,'Functional Safety (Second Edition)',326),
-('6647167443538',5,'Functional Safety (Second Edition)',326),
+('6647167443538',5,'Functional Safety (Second Edition)',326);
